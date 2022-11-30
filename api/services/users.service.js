@@ -62,10 +62,20 @@ const patchUserUpdate = async (id, user) => {
   return await getUserById(id)
 }
 
+const deleteUser = async (userId) => {
+  const users = await getUserList();
+  const position = users.map(e => parseInt(e.id)).indexOf(parseInt(userId))
+  if (position > -1) { // only splice array when item is found
+    users.splice(position, 1); // 2nd parameter means remove one item only
+  }
+  return true
+}
+
 module.exports = {
   getUserList,
   getUserById,
   getUserByEmail,
   postUserInsert,
-  patchUserUpdate
+  patchUserUpdate,
+  deleteUser
 }

@@ -1,0 +1,19 @@
+<p>user-master works!</p>
+<form [formGroup]="userMaster" (ngSubmit)="onSubmit()">
+  <label for="first_name">First Name: </label>
+  <input id="first_name" type="text" formControlName="first_name">
+
+  <label for="last_name">Last Name: </label>
+  <input id="last_name" type="text" formControlName="last_name">
+
+  <label for="email">Email: </label>
+  <input id="email" type="text" formControlName="email">
+
+  <label for="password">Password: </label>
+  <input id="password" type="password" formControlName="password">
+
+  <p>Complete the form to enable button.</p>
+<button type="submit" [disabled]="!userMaster.valid">Submit</button>
+
+<p>{{ frmValues | json }}</p>
+</form>
