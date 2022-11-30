@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const { getUserById, getUserList, postUserInsert, patchUserUpdate } = require('../services/users.service')
+const { getUserById, getUserList, postUserInsert, patchUserUpdate, deleteUser } = require('../services/users.service')
 
 /* GET users listing. */
 router.get('/', async (req, res, next) => {
@@ -41,6 +41,15 @@ router.patch('/:id', async (req, res, next) => {
     code: 200,
     msg: 'User Details',
     data: {user}
+  });
+});
+
+router.delete('/:id', async (req, res, next) => {
+  const id = parseInt(req.params.id)
+  const user = await deleteUser(id)
+  res.send({
+    code: 200,
+    msg: 'User Deleted'
   });
 });
 
