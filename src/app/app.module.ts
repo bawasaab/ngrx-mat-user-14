@@ -16,6 +16,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import * as fromStore from './login/reducers';
+import { loginReducer } from './login/reducers/index';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import * as fromStore from './login/reducers';
     HttpClientModule,
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    StoreModule.forFeature(fromStore.storeFeatureKey, fromStore.reducers)
+    StoreModule.forFeature(fromStore.storeFeatureKey, loginReducer)
   ],
   exports: [
     FormsModule,

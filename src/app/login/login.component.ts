@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { LoginService } from './login.service';
 import { loginAction } from './state/login.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private LoginService: LoginService,
-    private store: Store
+    private store: Store,
+    private router: Router
   ) { }
 
   ngOnInit(): void {}
@@ -37,6 +39,7 @@ export class LoginComponent implements OnInit {
     this.LoginService.login(user).subscribe((result) => {
       const user = result.data.user
       this.store.dispatch(loginAction({user}))
+      this.router.navigateByUrl('/user-list')
     })
   }
 }
