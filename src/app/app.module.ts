@@ -12,6 +12,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserMasterComponent } from './user-master/user-master.component';
 import { UserMasterEditComponent } from './user-master-edit/user-master-edit.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import * as fromStore from './login/reducers';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,10 @@ import { UserMasterEditComponent } from './user-master-edit/user-master-edit.com
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({}, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreModule.forFeature(fromStore.storeFeatureKey, fromStore.reducers)
   ],
   exports: [
     FormsModule,
