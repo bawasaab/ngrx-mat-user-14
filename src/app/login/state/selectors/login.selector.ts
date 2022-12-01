@@ -7,3 +7,13 @@ export const selectLogin = createSelector(
   selectLoginSelector,
   (state: LoginState) => state.user
 );
+
+export const selectIsLoggedIn = createSelector(
+  selectLoginSelector,
+  (state: LoginState) => !!state.user
+);
+
+export const selectIsLoggedOut = createSelector(
+  selectLoginSelector,
+  (state: LoginState) => !state.user
+);

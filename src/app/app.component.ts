@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-// import { FormBuilder } from '@angular/forms';
+import { select, Store } from '@ngrx/store';
+import { LoginState } from './login/state/login.state';
+import { selectLogin, selectIsLoggedIn, selectIsLoggedOut } from './login/state/selectors/login.selector';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,22 +11,22 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ngrx-mat-user-14';
+  isLoggedIn$!: Observable<boolean>;
+  isLoggedOut$!: Observable<boolean>;
 
-  // profileForm = this.fb.group({
-  //   firstName: [''],
-  //   lastName: [''],
-  // })
+  constructor(
+    private store: Store<LoginState>
+  ) {
+    this.store.select(selectLogin).subscribe((result) => {
+      console.log('AppComponent selector result', result)
+    })
 
-  // constructor(private fb: FormBuilder) { }
+    this.isLoggedIn$ = this.store.pipe(
+      select(selectIsLoggedIn)
+    )
 
-  // // convenience getter for easy access to form fields
-	// get f() { return this.profileForm.controls; }
-
-  // // convenience getter for easy access to form values
-  // get frmValues() { return this.profileForm.value; }
-
-  // onSubmit() {
-  //   // TODO: Use EventEmitter with form value
-  //   console.warn(this.profileForm.value);
-  // }
+    this.isLoggedOut$ = this.store.pipe(
+      select(selectIsLoggedOut)
+    )
+  }
 }
