@@ -12,11 +12,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserMasterComponent } from './user-master/user-master.component';
 import { UserMasterEditComponent } from './user-master-edit/user-master-edit.component';
-import { Action, ActionReducer, StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import * as fromStore from './login/state/login.state';
+import * as fromLoginStore from './login/state/login.state';
+import * as fromUserListStore from './user-list/state/user-list.state';
 import { loginReducer } from './login/state/reducers/login.reducers';
+import { UserListReducer } from './user-list/state/reducers/user-list.reducer';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { loginReducer } from './login/state/reducers/login.reducers';
     HttpClientModule,
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    StoreModule.forFeature(fromStore.storeFeatureKey, loginReducer)
+    StoreModule.forFeature(fromLoginStore.LoginFeatureKey, loginReducer),
+    StoreModule.forFeature(fromUserListStore.storeFeatureKey, UserListReducer)
   ],
   exports: [
     FormsModule,

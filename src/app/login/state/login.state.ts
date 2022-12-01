@@ -1,6 +1,6 @@
 import { User } from "src/app/models/user.model";
 
-export const storeFeatureKey = 'login';
+export const LoginFeatureKey = 'loginPage';
 
 export interface LoginState {
   user: User | undefined

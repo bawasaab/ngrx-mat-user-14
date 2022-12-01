@@ -1,3 +1,10 @@
+<p>
+  <b>User Session Below: </b>
+</p>
+
+<pre *ngIf="isLoggedIn$ | async">{{ session$ | async | json }}</pre>
+<hr />
+
 <span *ngIf="isLoggedOut$ | async">
   <a routerLink="login">Login</a>
 </span>
@@ -9,5 +16,6 @@
 <span *ngIf="isLoggedIn$ | async">
   <a routerLink="user-master">User Master</a>
 </span>
+
 <router-outlet></router-outlet>
 
