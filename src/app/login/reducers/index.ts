@@ -8,7 +8,7 @@ import {
   on
 } from '@ngrx/store';
 import { User } from 'src/app/models/user.model';
-import { loginActions } from '../state/login-action-types';
+import { loginActions } from '../actions/login-action-types';
 
 export interface LoginState {
   user: User | undefined
